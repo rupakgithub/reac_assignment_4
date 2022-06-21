@@ -1,0 +1,26 @@
+.is-Active {
+  font-weight: bold;
+  color: red;
+ 
+}
+
+.ele{
+  background-color: #98bb1b;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+
+}
+
+.loading{
+  text-align: center;
+  color: blue;
+}
+
+.main{
+  color: red;
+  height: 100%;
+  width: 100%;
+}
