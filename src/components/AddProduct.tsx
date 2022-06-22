@@ -1,28 +1,59 @@
 import * as React from "react";
 import "./AddProduct.css";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-const AddProduct = () => {
-  const product = React.useRef<HTMLInputElement>(null);
-  const quantity = React.useRef<HTMLInputElement>(null);
-  const price = React.useRef<HTMLInputElement>(null);
+type UserSubmitForm = {
+  product: string;
+  quantity: number;
+  price: number;
+};
 
-  const submitHandler = (event: React.FormEvent) => {
-    event.preventDefault();
-    console.log(product.current!.value);
-    console.log(quantity.current!.value);
-    console.log(price.current!.value);
-  };
+const schema = yup.object().shape({
+  product: yup
+    .string()
+    .min(3,"* Product must have 3 characters")
+    .required("Product is required value & should have 3 characters"),
+  quantity: yup
+    .number()
+    .positive()
+    .integer()
+    .required("Quantity should be more than 0"),
+  price: yup.number().positive().required("Price should be more than 1"),
+});
+
+const AddProduct: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserSubmitForm>({
+    resolver: yupResolver(schema),
+  });
+
+  const submitForm = (data: UserSubmitForm) => {};
 
   return (
     <div className="product-form">
       <h1>Add Product</h1>
-      <form onSubmit={submitHandler}>
-        <label htmlFor="text">Product</label>
-        <input type="text" ref={product} />
-        <label htmlFor="number">Quantity</label>
-        <input type="number" min={0} ref={quantity} />
-        <label htmlFor="number">Price</label>
-        <input type="number" min={1} ref={price} />
+      <form onSubmit={handleSubmit(submitForm)}>
+
+        <input type="text" {...register("product")} placeholder="product" />
+        
+        <p style={{color:'red'}}>{errors.product?.message}</p>
+        <input
+          type="number"
+          placeholder="quantity"
+          {...register("quantity")}
+        />
+        <p>{errors.quantity?.message}</p>
+        <input
+          type="number"
+          {...register("price")}
+          placeholder="price"
+        />
+        <p>{errors.price?.message}</p>
         <button className="form-btn" type="submit">
           Submit
         </button>

@@ -11,10 +11,8 @@ type ProductType = {
 
 const Product: React.FC = () => {
   const [products, setProducts] = React.useState<ProductType[]>([]);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const fetchProducts = React.useCallback(async (): Promise<any> => {
-    setIsLoading(true);
     const response = await fetch("http://localhost:3004/products");
     const data = await response.json();
 
@@ -27,8 +25,6 @@ const Product: React.FC = () => {
     } else {
       return Promise.reject(new Error("Error in getting products"));
     }
-
-    setIsLoading(false);
   }, []);
 
   React.useEffect(() => {
@@ -37,15 +33,14 @@ const Product: React.FC = () => {
 
   return (
     <>
-      {isLoading && <h1 className="loading">Loading...</h1>}
-      {!isLoading && (
+      {
         <tbody>
           {products &&
             products.map((row) => {
               return (
                 <tr key={row.id}>
                   <td>{row.id}</td>
-                  <ItemLink product={row.product_name}/>
+                  <ItemLink product={row.product_name} />
                   <td>{row.quantity}</td>
                   <td>
                     <span>Rs </span>
@@ -55,7 +50,7 @@ const Product: React.FC = () => {
               );
             })}
         </tbody>
-      )}
+      }
     </>
   );
 };
