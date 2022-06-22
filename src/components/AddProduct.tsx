@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./AddProduct.css";
+import "../styles/AddProduct.css";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

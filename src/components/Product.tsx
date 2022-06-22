@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./Header.css";
+import "../styles/Header.css";
 import ItemLink from "./ItemLink";
 
 type ProductType = {

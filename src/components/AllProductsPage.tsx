@@ -18,13 +18,19 @@ const AllProductsPage: React.FC = () => {
 
   return (
     <>
-      <h1>Product List</h1>
-      <table>
-        <ProductsList headers={headers} />
-        <Product />
-      </table>
-      {" "}
-      <NavLink to="/addProduct" exact activeClassName="is-Active">Add Products</NavLink>
+      <div style={{ margin: "20px" }}>
+        <h1>Product List</h1>
+        <table>
+          <ProductsList headers={headers} />
+          <Product />
+        </table>
+      </div>
+
+      <div style={{ margin: "20px" }}>
+        <NavLink to="/addProduct" exact activeClassName="is-Active">
+          Add Products
+        </NavLink>
+      </div>
     </>
   );
 };

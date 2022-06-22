@@ -5,7 +5,6 @@ const ItemLink: React.FC<{ product: string }> = (props) => {
   
   return (
     <>
-     
       <Prompt
         message={(location, action) => {
           // if (action === "POP") {

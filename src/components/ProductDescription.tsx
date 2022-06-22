@@ -12,7 +12,6 @@ const ProductDescription: React.FC = () => {
       <p>
         <span style={{ fontWeight: "bold" }}>Product Name:</span> {productId}
       </p>
-
       <NavLink to="/product" exact>Back</NavLink>
     </>
   );
